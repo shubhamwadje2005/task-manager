@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(CookieParser())
 
 app.use("/", (req, res) => {
-    res.status(200).json({ message: "Task Manger Api Running....." })
+    res.status(200).json({ message: `Task Manger Api Running in ${process.env.NODE_ENV} mode` })
 })
 
 mongoose.connection.once("open", () => {
