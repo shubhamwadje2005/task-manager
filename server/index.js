@@ -1,0 +1,24 @@
+require("dotenv").config()
+const express = require("express")
+const mongoose = require("mongoose")
+const cors = require("cors")
+const CookieParser = require("cookie-parser")
+
+const app = express()
+mongoose.connect(process.env.MONGO_URL)
+
+app.use(express.json())
+app.use(CookieParser())
+
+app.use("/", (req, res) => {
+    res.status(200).json({ message: "Task Manger Api Running....." })
+})
+
+mongoose.connection.once("open", () => {
+    console.log("db connected")
+    app.listen(process.env.PORT, () => {
+        console.log("server Running")
+        console.log(`mode:${process.env.NODE_ENV}`)
+
+    })
+})
